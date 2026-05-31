@@ -1,0 +1,6 @@
+# Python dependencies for the container environment
+boto3
+awscli
+pytest
+pytest-cov
+black

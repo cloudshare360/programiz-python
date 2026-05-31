@@ -42,5 +42,8 @@ htmlcov/
 .env.local
 *.log
 
+# Local virtualenv
+.venv/
+
 # AWS
 .aws/
