@@ -1,0 +1,49 @@
+{
+    "name": "Python & AWS CLI",
+    "image": "mcr.microsoft.com/devcontainers/python:0-3.11",
+    "remoteUser": "vscode",
+    "workspaceFolder": "/workspace",
+
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "ms-python.debugpy",
+                "ms-python.black-formatter",
+                "AWS.aws-toolkit-vscode",
+                "eamodio.gitlens"
+            ],
+            "settings": {
+                "python.defaultInterpreterPath": "/usr/local/bin/python",
+                "python.linting.enabled": true,
+                "python.formatting.provider": "black",
+                "python.formatting.blackArgs": ["--line-length", "100"],
+                "[python]": {
+                    "editor.defaultFormatter": "ms-python.black-formatter",
+                    "editor.formatOnSave": true
+                },
+                "python.testing.pytestEnabled": true,
+                "python.testing.pytestArgs": [
+                    "tests"
+                ]
+            }
+        }
+    },
+
+    "containerEnv": {
+        "AWS_DEFAULT_REGION": "us-east-1",
+        "PYTHONUNBUFFERED": "1",
+        "PYTHONDONTWRITEBYTECODE": "1"
+    },
+
+    "mounts": [
+        "source=${localEnv:HOME}/.aws,target=/home/vscode/.aws,type=bind,consistency=cached"
+    ],
+
+    "postCreateCommand": "python -m pip install --upgrade pip && pip install awscli boto3 pytest pytest-cov black",
+
+    "remoteEnv": {
+        "PATH": "${containerEnv:PATH}:/usr/local/bin"
+    }
+}
